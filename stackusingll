@@ -1,0 +1,78 @@
+#include<stdio.h>
+
+void push(int);
+void pop();
+void peek();
+void t();
+
+struct node
+{
+    int data;
+    struct node *next;
+}*top=NULL;
+
+int main()
+{
+    int ch,d,n;
+    do
+    {
+        printf("1.push 2.pop 3.peek 4 top \n enter choice:");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:printf("enter element to be pushed:");
+                   scanf("%d",&d);
+                   push(d);
+                   break;
+            case 2:pop();
+                   break;
+            case 3:peek();
+                   break;
+            case 4:t();
+                   break;
+            default:printf("invalid choice");
+        }
+        printf("enter 1 to continue");
+        scanf("%d",&n);
+    }while(n==1);
+    return 0;
+}
+
+void push(int a)
+{
+    struct node *newnode;
+    newnode= (struct node *)malloc(sizeof(struct node));
+    if(!newnode)
+    {
+        printf("memorry cannot be allocated");
+    }
+    newnode->data=a;
+    newnode->next=top;
+    top=newnode;
+}
+
+void pop()
+{
+    struct node *temp=top;
+    if(top==NULL)
+    {
+        printf("underflow");
+    }
+    printf("poped elemnt is %d",temp->data);
+    top=top->next;
+    free(temp);
+}
+
+void peek()
+{
+  if(top==NULL)
+    {
+        printf("empty stack");
+    }
+    printf("peek is %d\n",top->data);
+}
+void t()
+{
+  printf("top is %d",top);
+}
+ 
